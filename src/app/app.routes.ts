@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
+import { PatientAdmissionComponent } from './shared/patient-admission/patient-admission.component';
 
 export const routes: Routes = [
   {
     path: 'admission',
-    loadComponent: () =>
-      import('./patient-admission/patient-admission/patient-admission.component')
-        .then(m => m.PatientAdmissionComponent)
+    component: PatientAdmissionComponent
   }
 ];
