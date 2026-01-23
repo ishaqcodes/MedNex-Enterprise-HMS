@@ -1,0 +1,22 @@
+<div class="admit-patient-container">
+  <h2>Admit New Patient</h2>
+
+  <form (ngSubmit)="admitPatient()">
+    <div class="form-group">
+      <label for="name">Patient Name</label>
+      <input type="text" id="name" [(ngModel)]="patient.name" name="name" placeholder="Enter full name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" [(ngModel)]="patient.age" name="age" placeholder="Enter age" required>
+    </div>
+
+    <div class="form-group">
+      <label for="hospital">Hospital</label>
+      <input type="text" id="hospital" [(ngModel)]="patient.hospital" name="hospital" placeholder="Enter hospital name" required>
+    </div>
+
+    <button type="submit" class="btn-submit">Admit Patient</button>
+  </form>
+</div>
