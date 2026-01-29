@@ -1,0 +1,34 @@
+package com.mednex.mednex_backend.config;
+
+import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@Component
+public class TenantFilter extends OncePerRequestFilter {
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        
+        System.out.println("🔥 1. Filter Hit hua! Request aayi: " + request.getRequestURI());
+
+        String tenantId = request.getHeader("X-TenantID");
+        System.out.println("🔥 2. Header mila: " + tenantId);
+
+        if (tenantId != null) {
+            TenantContext.setTenantId(tenantId);
+        }
+
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            TenantContext.clear();
+        }
+    }
+}
