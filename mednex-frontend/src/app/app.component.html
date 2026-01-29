@@ -1,0 +1,188 @@
+<div class="container">
+  <header>
+    <div class="brand">
+      <h1>🏥 MedNex Enterprise</h1>
+      <span class="badge">Week 1-2 Demo</span>
+    </div>
+
+    <div class="tenant-control">
+      <label>Active Hospital DB:</label>
+      <select (change)="onTenantChange($event)" class="tenant-select">
+        <option *ngFor="let t of tenants" [value]="t.id">{{ t.name }}</option>
+      </select>
+    </div>
+  </header>
+
+  <div *ngIf="successMessage" class="alert-success">{{ successMessage }}</div>
+
+  <div class="grid-layout">
+    <div class="card form-card">
+      <h2>📋 Patient Admission Form (EMR)</h2>
+      <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
+        <div class="section-group">
+          <h3>👤 Basic Identity</h3>
+          <div class="row">
+            <input formControlName="name" placeholder="Full Name *" required />
+            <input
+              formControlName="age"
+              type="number"
+              placeholder="Age *"
+              required
+            />
+            <select formControlName="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div formGroupName="medicalHistory">
+          <div class="section-group">
+            <h3>❤️ Vitals & Stats</h3>
+            <div class="grid-4">
+              <input formControlName="height" placeholder="Height (cm)" />
+              <input formControlName="weight" placeholder="Weight (kg)" />
+              <input formControlName="bpSystolic" placeholder="BP (Sys)" />
+              <input formControlName="bpDiastolic" placeholder="BP (Dia)" />
+              <input formControlName="pulse" placeholder="Pulse (bpm)" />
+              <input formControlName="temperature" placeholder="Temp (°F)" />
+              <input formControlName="spo2" placeholder="SpO2 (%)" />
+              <input formControlName="bmi" placeholder="BMI" />
+            </div>
+          </div>
+
+          <div class="section-group">
+            <h3>🏥 Admission Info</h3>
+            <div class="row">
+              <select formControlName="admissionType">
+                <option>Emergency</option>
+                <option>OPD</option>
+                <option>Referral</option>
+              </select>
+              <input formControlName="wardName" placeholder="Ward Name" />
+              <input formControlName="bedNumber" placeholder="Bed No." />
+            </div>
+            <textarea
+              formControlName="reasonForAdmission"
+              placeholder="Reason for Admission *"
+              rows="2"
+            ></textarea>
+            <textarea
+              formControlName="symptoms"
+              placeholder="Current Symptoms *"
+              rows="2"
+            ></textarea>
+          </div>
+
+          <div class="section-group">
+            <h3>💊 Medical History</h3>
+            <div class="grid-3">
+              <input formControlName="bloodGroup" placeholder="Blood Group" />
+              <input
+                formControlName="allergies"
+                placeholder="Allergies (if any)"
+              />
+              <input
+                formControlName="chronicConditions"
+                placeholder="Chronic (Diabetes/BP)"
+              />
+              <input
+                formControlName="pastSurgeries"
+                placeholder="Past Surgeries"
+              />
+              <input
+                formControlName="currentMedications"
+                placeholder="Current Meds"
+              />
+              <input
+                formControlName="smokingStatus"
+                placeholder="Smoking Status"
+              />
+            </div>
+          </div>
+
+          <div class="section-group">
+            <h3>🛡️ Insurance & Contact</h3>
+            <div class="row">
+              <input
+                formControlName="insuranceProvider"
+                placeholder="Insurance Co."
+              />
+              <input formControlName="policyNumber" placeholder="Policy No." />
+              <input formControlName="phone" placeholder="Phone No. *" />
+              <input formControlName="email" placeholder="Email Address" />
+            </div>
+            <div class="row">
+              <input
+                formControlName="emergencyName"
+                placeholder="Emergency Contact Name"
+              />
+              <input
+                formControlName="emergencyPhone"
+                placeholder="Emergency Phone"
+              />
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!admissionForm.valid"
+          class="btn-submit"
+        >
+          Admit Patient (Save to JSONB)
+        </button>
+      </form>
+    </div>
+
+    <div class="card list-card">
+      <div class="list-header">
+        <h2>📂 DB Records: {{ currentTenant }}</h2>
+        <span class="count-badge">{{ patients.length }} Records</span>
+      </div>
+
+      <div class="table-container">
+        <table *ngIf="patients.length > 0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Admitted For (JSON)</th>
+              <th>Vitals (JSON)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of patients">
+              <td>{{ p.id }}</td>
+              <td>
+                <strong>{{ p.name }}</strong
+                ><br />
+                <small>{{ p.age }} yrs / {{ p.gender }}</small>
+              </td>
+              <td>
+                <span class="tag">{{ p.medicalHistory?.admissionType }}</span>
+                <br />{{ p.medicalHistory?.reasonForAdmission }}
+              </td>
+              <td>
+                BP: {{ p.medicalHistory?.bpSystolic }}/{{
+                  p.medicalHistory?.bpDiastolic
+                }}<br />
+                Temp: {{ p.medicalHistory?.temperature }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="patients.length === 0" class="empty-state">
+          <p>
+            No records found in <strong>{{ currentTenant }}</strong
+            >.
+          </p>
+          <small
+            >Switch Hospital or Add a Patient to verify Multi-Tenancy.</small
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
