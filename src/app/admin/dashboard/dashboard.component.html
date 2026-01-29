@@ -1,0 +1,30 @@
+<div class="admin-dashboard">
+  <aside class="sidebar">
+    <h2>Admin Menu</h2>
+    <nav>
+      <ul>
+        <li routerLink="/admin" routerLinkActive="active">Dashboard</li>
+        <li routerLink="/admin/patients" routerLinkActive="active">Patients</li>
+        <li routerLink="/admin/doctors" routerLinkActive="active">Doctors</li>
+        <li routerLink="/admin/appointments" routerLinkActive="active">Appointments</li>
+        <li routerLink="/admin/payments" routerLinkActive="active">Payments</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <h1>Welcome, Admin</h1>
+      <button (click)="logout()">Logout</button>
+    </header>
+
+    <section class="cards">
+      <div class="card" routerLink="/admin/patients">Patients</div>
+      <div class="card" routerLink="/admin/doctors">Doctors</div>
+      <div class="card" routerLink="/admin/appointments">Appointments</div>
+      <div class="card" routerLink="/admin/payments">Payments</div>
+    </section>
+
+    <router-outlet></router-outlet>
+  </main>
+</div>

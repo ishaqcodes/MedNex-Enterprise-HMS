@@ -1,0 +1,42 @@
+<div class="dashboard-wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>MedNex</h2>
+    </div>
+    <ul class="nav-links">
+      <li routerLink="/doctor/patients" routerLinkActive="active">Patient List</li>
+      <li routerLink="/doctor/admit-patient" routerLinkActive="active">Admit Patient</li>
+    </ul>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header>
+      <h1>Welcome, Doctor</h1>
+      <p>Manage patients efficiently</p>
+    </header>
+
+    <!-- Cards -->
+    <section class="cards">
+      <div class="card total-patients">
+        <div class="card-title">Total Patients</div>
+        <div class="card-value">{{ patients.length }}</div>
+      </div>
+      <div class="card admitted-today">
+        <div class="card-title">Patients Admitted Today</div>
+        <div class="card-value">5</div>
+      </div>
+      <div class="card quick-admit">
+        <div class="card-title">Quick Admit</div>
+        <a routerLink="/doctor/admit-patient" class="btn">Admit Now</a>
+      </div>
+    </section>
+
+    <!-- Child Pages -->
+    <section class="child-page">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
