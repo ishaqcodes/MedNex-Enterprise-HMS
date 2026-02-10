@@ -1,0 +1,208 @@
+<div class="admission-wrapper">
+  <div class="header">
+    <h2><mat-icon>app_registration</mat-icon> Patient Registration</h2>
+    <p>OPD Consultation & IPD Admission Portal</p>
+  </div>
+
+  <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
+    <mat-tab-group animationDuration="500ms" mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="1. Personal Details">
+        <div class="tab-content">
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" required />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" required />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" required />
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <div class="radio-group">
+              <label>Gender: </label>
+              <mat-radio-group formControlName="gender">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+                <mat-radio-button value="Other">Other</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Marital Status</mat-label>
+              <mat-select formControlName="maritalStatus">
+                <mat-option value="Single">Single</mat-option>
+                <mat-option value="Married">Married</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Aadhar / Gov ID</mat-label>
+              <input matInput formControlName="aadhar" required placeholder="12 Digit Number" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Contact Number</mat-label>
+              <input matInput formControlName="contactNumber" required placeholder="98XXXXXXXX" />
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+          </div>
+
+          <div class="row full-width">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Residential Address</mat-label>
+              <textarea matInput formControlName="address" rows="2"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline"
+              ><mat-label>City</mat-label><input matInput formControlName="city"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>State</mat-label><input matInput formControlName="state"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Zip Code</mat-label><input matInput formControlName="zipCode"
+            /></mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="2. Clinical Info">
+        <div class="tab-content">
+          <div class="registration-type-box">
+            <label>Registration Type:</label>
+            <mat-radio-group formControlName="registrationType" color="primary">
+              <mat-radio-button value="OPD">OPD (Consultation)</mat-radio-button>
+              <mat-radio-button value="IPD">IPD (Admission)</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <br />
+
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Blood Group</mat-label>
+              <mat-select formControlName="bloodGroup" required>
+                <mat-option value="A+">A+</mat-option>
+                <mat-option value="B+">B+</mat-option>
+                <mat-option value="O+">O+</mat-option>
+                <mat-option value="AB+">AB+</mat-option>
+                <mat-option value="O-">O-</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Height (cm)</mat-label><input matInput formControlName="height"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Weight (kg)</mat-label><input matInput formControlName="weight"
+            /></mat-form-field>
+          </div>
+
+          <div class="row checkbox-row">
+            <mat-checkbox formControlName="isDiabetic" color="warn">Diabetic</mat-checkbox>
+            <mat-checkbox formControlName="isHypertensive" color="warn">Hypertension</mat-checkbox>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Chief Complaint / Symptoms</mat-label>
+            <textarea
+              matInput
+              formControlName="chiefComplaint"
+              required
+              rows="2"
+              placeholder="Fever, Chest Pain..."
+            ></textarea>
+          </mat-form-field>
+
+          <div class="row section-highlight">
+            <mat-form-field appearance="outline">
+              <mat-label>Assign Doctor</mat-label>
+              <mat-select formControlName="admittingDoctor" required>
+                <mat-option value="Dr. Arvind">Dr. Arvind (Cardio)</mat-option>
+                <mat-option value="Dr. Sarah">Dr. Sarah (Neuro)</mat-option>
+                <mat-option value="Dr. Strange">Dr. Strange (General)</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              *ngIf="admissionForm.get('registrationType')?.value === 'IPD'"
+            >
+              <mat-label>Required Bed Type</mat-label>
+              <mat-select formControlName="bedType">
+                <mat-option value="General">General Ward</mat-option>
+                <mat-option value="ICU">ICU (Critical)</mat-option>
+              </mat-select>
+              <mat-hint><strong>Auto-Allocation Active</strong></mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="3. Emergency & Insurance">
+        <div class="tab-content">
+          <h3>Emergency Contact</h3>
+          <div class="row">
+            <mat-form-field appearance="outline"
+              ><mat-label>Next of Kin Name</mat-label
+              ><input matInput formControlName="emergencyName" required
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Relation</mat-label
+              ><input matInput formControlName="emergencyRelation" required
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Phone Number</mat-label
+              ><input matInput formControlName="emergencyPhone" required
+            /></mat-form-field>
+          </div>
+
+          <mat-divider></mat-divider>
+          <br />
+
+          <h3>Insurance Details</h3>
+          <div class="row">
+            <mat-form-field appearance="outline"
+              ><mat-label>Insurance Provider</mat-label
+              ><input matInput formControlName="insuranceProvider"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Policy Number</mat-label><input matInput formControlName="policyNumber"
+            /></mat-form-field>
+            <mat-checkbox formControlName="isCashless" class="mt-2"
+              >Cashless Admission</mat-checkbox
+            >
+          </div>
+
+          <div class="action-buttons">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!admissionForm.valid"
+              class="big-btn"
+            >
+              <mat-icon>check_circle</mat-icon>
+              {{
+                admissionForm.get('registrationType')?.value === 'OPD'
+                  ? 'Generate OPD Token'
+                  : 'Confirm Admission'
+              }}
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>

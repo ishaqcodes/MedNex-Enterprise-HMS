@@ -1,0 +1,63 @@
+<div class="patient-wrapper">
+  <div class="header">
+    <div class="profile-info">
+      <div class="avatar">{{ patientName.charAt(0) }}</div>
+      <div>
+        <h1>Hello, {{ patientName }} 👋</h1>
+        <p>
+          Patient ID: <strong>{{ patientId }}</strong>
+        </p>
+      </div>
+    </div>
+    <button mat-stroked-button class="white-btn"><mat-icon>edit</mat-icon> Edit Profile</button>
+  </div>
+
+  <div class="vitals-grid">
+    <mat-card class="vital-card" *ngFor="let v of vitals">
+      <div class="icon-box" [style.color]="v.color" [style.background]="v.color + '20'">
+        <mat-icon>{{ v.icon }}</mat-icon>
+      </div>
+      <div class="vital-info">
+        <span class="label">{{ v.label }}</span>
+        <span class="value">{{ v.value }}</span>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="history-section">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="💊 Prescriptions">
+        <div class="tab-content">
+          <mat-card *ngFor="let rx of prescriptions" class="rx-card">
+            <div class="rx-header">
+              <h3>{{ rx.diagnosis }}</h3>
+              <mat-chip [color]="rx.status === 'Active' ? 'primary' : 'accent'" selected>{{
+                rx.status
+              }}</mat-chip>
+            </div>
+            <p class="doc-name">
+              Prescribed by <strong>{{ rx.doctor }}</strong> on {{ rx.date }}
+            </p>
+            <mat-divider></mat-divider>
+            <div class="rx-meds"><mat-icon>medication</mat-icon> {{ rx.medicine }}</div>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="🧪 Lab Reports">
+        <div class="tab-content">
+          <mat-list>
+            <mat-list-item *ngFor="let report of reports">
+              <mat-icon matListItemIcon class="file-icon">description</mat-icon>
+              <span matListItemTitle>{{ report.name }}</span>
+              <span matListItemLine>{{ report.date }} • Result: {{ report.result }}</span>
+              <button mat-icon-button matListItemMeta (click)="downloadReport(report.name)">
+                <mat-icon>download</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

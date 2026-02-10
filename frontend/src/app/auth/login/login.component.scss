@@ -1,0 +1,91 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 20px;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.brand-section {
+  text-align: center;
+  color: white;
+  
+  .logo-box {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5);
+    
+    mat-icon { font-size: 40px; height: 40px; width: 40px; color: white; }
+  }
+
+  h1 { font-size: 2.5rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  p { font-size: 1.1rem; opacity: 0.7; margin-top: 10px; font-weight: 300; }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.98);
+
+  .card-header {
+    text-align: center;
+    margin-bottom: 25px;
+    h3 { margin: 0; font-size: 1.5rem; color: #1e293b; font-weight: 700; }
+    p { margin: 5px 0 0 0; color: #64748b; font-size: 0.9rem; }
+  }
+}
+
+.full-width { width: 100%; margin-bottom: 5px; }
+
+.tenant-field {
+  // Hospital Code field ko highlight karne ke liye
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    background-color: #eff6ff !important; // Light Blue
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 20px 0;
+  span { 
+    font-size: 0.75rem; 
+    color: #94a3b8; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    font-weight: 600;
+  }
+  &::before, &::after {
+    content: ''; flex: 1; height: 1px; background: #e2e8f0; margin: 0 10px;
+  }
+}
+
+.login-btn {
+  padding: 24px 0;
+  font-size: 1rem;
+  margin-top: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.footer-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+  
+  a { color: #2563eb; text-decoration: none; font-weight: 500; &:hover { text-decoration: underline; } }
+  span { margin: 0 8px; }
+}

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BedAvailability } from './bed-availability';
+import { BedAvailability } from './bed-availability.component';
 
 describe('BedAvailability', () => {
   let component: BedAvailability;

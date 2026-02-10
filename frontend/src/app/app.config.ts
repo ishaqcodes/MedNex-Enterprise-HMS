@@ -3,9 +3,13 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { tenantInterceptor } from './core/interceptors/tenant-interceptor';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([tenantInterceptor]))
   ]
 };

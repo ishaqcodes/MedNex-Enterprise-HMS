@@ -1,0 +1,131 @@
+.bed-container {
+  padding: 30px;
+  background-color: #f8fafc; // Light gray background
+  min-height: 100vh;
+}
+
+// Header & Legend
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1e293b; // Slate-800
+    font-weight: 700;
+  }
+
+  .legend {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      
+      &::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      &.available {
+        color: #16a34a; // Green-600
+        &::before { background-color: #22c55e; } // Green-500
+      }
+
+      &.occupied {
+        color: #dc2626; // Red-600
+        &::before { background-color: #ef4444; } // Red-500
+      }
+    }
+  }
+}
+
+// Grid Layout for Beds
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // Default 3 columns
+  gap: 20px;
+
+  // Responsive Breakpoints (Tablet & Desktop)
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+// Individual Bed Card Styling
+.bed-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  gap: 8px;
+
+  // Icons size
+  mat-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  // Hover Effect
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  // Active Click Effect
+  &:active {
+    transform: scale(0.95);
+  }
+
+  // --- Dynamic Status Styles ---
+  
+  // Available State (Green)
+  &.available-bg {
+    background-color: #f0fdf4; // Green-50
+    border-color: #dcfce7; // Green-100
+    color: #15803d; // Green-700
+  }
+
+  // Occupied State (Red)
+  &.occupied-bg {
+    background-color: #fef2f2; // Red-50
+    border-color: #fee2e2; // Red-100
+    color: #b91c1c; // Red-700
+  }
+}
+
+// Bottom Hint Text
+.hint {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.75rem;
+  color: #94a3b8; // Slate-400
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

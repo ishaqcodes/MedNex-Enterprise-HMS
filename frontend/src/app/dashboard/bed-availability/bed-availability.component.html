@@ -1,0 +1,32 @@
+<div class="bed-container">
+  <div class="header">
+    <h3>Real-Time Bed Availability</h3>
+    <div class="legend">
+      <span class="available">Available</span>
+      <span class="occupied">Occupied</span>
+      <span class="cleaning">ICU (Critical)</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div
+      *ngFor="let bed of beds"
+      class="bed-card"
+      [class.available-bg]="bed.status === 'Available'"
+      [class.occupied-bg]="bed.status === 'Occupied'"
+      (click)="handleBedClick(bed)"
+    >
+      <mat-icon>{{ bed.type === 'ICU' ? 'monitor_heart' : 'single_bed' }}</mat-icon>
+
+      <span class="bed-id">{{ bed.id }}</span>
+      <span class="bed-type">{{ bed.type }}</span>
+
+      <span *ngIf="bed.patientName" class="patient-name">{{ bed.patientName }}</span>
+      <span *ngIf="!bed.patientName" class="status-text">VACANT</span>
+    </div>
+  </div>
+
+  <div class="hint">
+    <p>ℹ️ Click on an <strong>Occupied Bed (Red)</strong> to Discharge the patient.</p>
+  </div>
+</div>

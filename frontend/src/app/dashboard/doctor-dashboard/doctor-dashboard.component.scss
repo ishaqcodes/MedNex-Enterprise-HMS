@@ -1,0 +1,103 @@
+$primary: #0ea5e9; // Sky Blue
+$bg-color: #f8fafc;
+
+.doctor-wrapper {
+  background-color: $bg-color;
+  min-height: 100vh;
+}
+
+// Hero Header (Doctor wala Blue Theme)
+.hero-header {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: white;
+  padding: 40px 40px 80px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .hero-content {
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 8px;
+      mat-icon { font-size: 16px; height: 16px; width: 16px; margin: 0 5px; }
+    }
+    h1 { font-size: 2rem; font-weight: 700; margin: 0; }
+    p { margin: 5px 0 0 0; opacity: 0.9; }
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+    .stat-box {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-align: center;
+      
+      .num { display: block; font-size: 1.8rem; font-weight: 800; }
+      .txt { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+      
+      &.warning { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); }
+    }
+  }
+}
+
+.content-body {
+  padding: 0 40px;
+  margin-top: -50px;
+}
+
+// Table Styling
+.table-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+
+  .table-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    h3 { margin: 0; color: #334155; font-size: 1.1rem; font-weight: 700; }
+  }
+
+  table { width: 100%; }
+
+  th.mat-header-cell {
+    background-color: #f1f5f9;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 16px 24px;
+  }
+
+  td.mat-cell {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f8fafc;
+    color: #1e293b;
+  }
+
+  .patient-info {
+    display: flex;
+    flex-direction: column;
+    .name { font-weight: 600; font-size: 0.95rem; }
+    .meta { font-size: 0.8rem; color: #64748b; }
+  }
+
+  // Badges & Status
+  .badge {
+    padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    &.high { background: #fee2e2; color: #dc2626; }
+    &.normal { background: #dbeafe; color: #2563eb; }
+  }
+
+  .status-dot {
+    height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 6px;
+    &.wait { background: #f59e0b; } // Orange
+    &.done { background: #10b981; } // Green
+  }
+}

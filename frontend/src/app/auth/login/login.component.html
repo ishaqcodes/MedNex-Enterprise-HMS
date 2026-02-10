@@ -1,0 +1,66 @@
+<div class="login-wrapper">
+  
+  <div class="brand-section">
+    <div class="logo-box">
+      <mat-icon>local_hospital</mat-icon>
+    </div>
+    <h1>MedNex Enterprise</h1>
+    <p>Multi-Tenant Hospital Management System</p>
+  </div>
+
+  <mat-card class="login-card">
+    <div class="card-header">
+      <h3>Secure Portal Login</h3>
+      <p>Enter your hospital code to proceed.</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <mat-form-field appearance="outline" class="full-width tenant-field">
+        <mat-label>Hospital Code / Tenant ID</mat-label>
+        <input matInput formControlName="tenantId" placeholder="Ex. apollo, aiims, tata">
+        <mat-icon matSuffix>domain</mat-icon>
+        <mat-hint>Enter the organization ID provided by IT</mat-hint>
+      </mat-form-field>
+
+      <div class="divider">
+        <span>User Credentials</span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select Your Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Admin">Admin</mat-option>
+          <mat-option value="Doctor">Doctor</mat-option>
+          <mat-option value="Receptionist">Receptionist</mat-option>
+          <mat-option value="Patient">Patient</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" placeholder="user@mednex.com">
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width login-btn" type="submit" [disabled]="loginForm.invalid">
+        Access Workspace <mat-icon>arrow_forward</mat-icon>
+      </button>
+
+      <div class="footer-links">
+        <a href="#">Forgot Password?</a>
+        <span>•</span>
+        <a href="#">Register New Hospital</a>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

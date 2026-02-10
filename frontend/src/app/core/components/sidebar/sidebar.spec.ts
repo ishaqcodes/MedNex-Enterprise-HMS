@@ -1,20 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SidebarComponent } from './sidebar.component'; // <--- Yahan naam sahi kar diya
 
-import { Sidebar } from './sidebar';
-
-describe('Sidebar', () => {
-  let component: Sidebar;
-  let fixture: ComponentFixture<Sidebar>;
+describe('SidebarComponent', () => {
+  let component: SidebarComponent;
+  let fixture: ComponentFixture<SidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Sidebar]
+      // Agar tumne Sidebar ko Standalone banaya hai to 'imports' me, 
+      // agar module based hai to 'declarations' me aayega. 
+      // Safety ke liye hum ise 'declarations' maan kar chal rahe hain:
+      declarations: [ SidebarComponent ] 
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(Sidebar);
+    
+    fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
