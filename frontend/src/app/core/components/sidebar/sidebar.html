@@ -1,0 +1,17 @@
+<aside class="sidebar">
+  <div class="logo">MedNex</div>
+  <nav>
+    <ng-container *ngFor="let item of menuItems">
+      <a *ngIf="item.roles.includes(role)" 
+         [routerLink]="item.path" 
+         routerLinkActive="active" 
+         class="nav-item">
+        <mat-icon>{{item.icon}}</mat-icon> 
+        {{ item.label }}
+      </a>
+    </ng-container>
+  </nav>
+  <button (click)="logout()" class="logout-btn">
+    <mat-icon>exit_to_app</mat-icon> Logout
+  </button>
+</aside>
